@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { applyMiddleware, createStore } from 'redux';
+import allReducers from './reducer/rootReducer';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+import ErrorBoundary from './ErrorBoundary';
+
+const store = createStore(allReducers, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store} >
+    <ErrorBoundary>  
+      <App />
+    </ErrorBoundary>
+  </Provider>,
   document.getElementById('root')
 );
 
